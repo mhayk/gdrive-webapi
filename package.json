@@ -12,5 +12,10 @@
   "devDependencies": {
     "jest": "27",
     "nodemon": "2.0"
+  },
+  "dependencies": {
+    "pino": "6.8",
+    "pino-pretty": "5.1",
+    "socket.io": "4.1"
   }
 }
