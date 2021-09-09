@@ -10,12 +10,12 @@ export default class Routes {
     }
 
     async defaultRoute(request, response) {
-        response.send('Hello World!');
+        response.end('Hello World!');
     }
 
     async options(request, response) {
         response.writeHead(204);
-        response.send('Hello World!');
+        response.end('Hello World!');
     }
 
     async post(request, response) {
