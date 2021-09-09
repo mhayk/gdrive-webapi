@@ -2,6 +2,7 @@ import https from 'https'
 import fs from 'fs'
 import { logger } from './logger.js'
 import { Server } from 'socket.io'
+import Routes from './routes.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -10,11 +11,10 @@ const localHostSSL = {
     cert: fs.readFileSync('./certificates/cert.pem'),
 }
 
+const routes = new Routes()
 const server = https.createServer(
     localHostSSL,
-    (req, res) => {
-        res.end('hello world')
-    }
+    routes.handler.bind(routes)
 )
 
 const io = new Server(server, {
@@ -24,6 +24,7 @@ const io = new Server(server, {
     }
 })
 
+routes.setSocketInstance(io)
 io.on("connection", (socket) => logger.info(`Client connected: ${socket.id}`))
 
 const startServer = () => {
